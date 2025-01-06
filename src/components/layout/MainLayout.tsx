@@ -2,14 +2,11 @@ import React, { useState } from 'react'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
 } from '@ant-design/icons';
-import { Button, Layout, Menu } from 'antd';
+import { Button, Layout, Menu, MenuProps } from 'antd';
 const { Header, Sider, Content } = Layout;
 
-const items = [
+const items: MenuProps['items'] = [
   {
     key: 'dashboard',
     label: 'Dashboard'

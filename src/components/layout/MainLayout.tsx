@@ -7,6 +7,7 @@ import {
 import { Button, Layout, Menu, MenuProps } from 'antd';
 const { Header, Sider, Content } = Layout;
 import logo from '../../assets/react.svg'
+import { Outlet } from 'react-router';
 
 const items: MenuProps['items'] = [
   {
@@ -63,7 +64,7 @@ const MainLayout = () => {
           minHeight: 280,
         }}
       >
-        Content
+        <Outlet/>
       </Content>
     </Layout>
   </Layout>

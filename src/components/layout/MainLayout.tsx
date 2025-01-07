@@ -1,25 +1,14 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {
   CloseOutlined,
   MenuUnfoldOutlined,
-  ProfileOutlined,
 } from '@ant-design/icons';
-import { Button, Layout, Menu, MenuProps } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 const { Header, Sider, Content } = Layout;
 import logo from '../../assets/react.svg'
 import { Outlet } from 'react-router';
+import { adminSidebarItems } from '../../routes/admin.routes';
 
-const items: MenuProps['items'] = [
-  {
-    key: 'dashboard',
-    label: 'Dashboard',
-    icon: <ProfileOutlined/>,
-  },
-  {
-    key: 'profile',
-    label: 'Profile'
-  }
-]
 
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -37,7 +26,7 @@ const MainLayout = () => {
         theme="dark"
         mode="inline"
         defaultSelectedKeys={['dashboard']}
-        items={items}
+        items={adminSidebarItems}
       />
     </Sider>
     <Layout>

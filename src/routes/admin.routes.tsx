@@ -1,52 +1,56 @@
-import { Children } from "react";
+import { Children, ReactNode } from "react";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
 
-const adminpath2 = [
+type TRoute ={
+    path: string,
+    element: ReactNode,
+}
+const adminpaths = [
     {
         name: "Dashboard",
         path: '/admin/dashboard',
-        element: <AdminDashboard/>,
+        element: <AdminDashboard />,
     },
     {
         name: 'User Management',
-        Children: [
+        children: [
             {
                 name: "Create Admin",
-                path: '/admin/create-admin',
-                element: <CreateAdmin/>,
+                path: 'create-admin',
+                element: <CreateAdmin />,
             },
             {
                 name: "Create Faculty",
-                path: '/admin/create-faculty',
-                element: <CreateFaculty/>,
+                path: 'create-faculty',
+                element: <CreateFaculty />,
             },
             {
                 name: "Create Student",
-                path: '/admin/create-student',
-                element: <CreateStudent/>,
+                path: 'create-student',
+                element: <CreateStudent />,
             },
         ]
     }
 ]
 
-export const adminPaths = [
-    {
-        path: 'dashboard',
-        element: <AdminDashboard/>
-    },
-    {
-        path: 'create-student',
-        element: <CreateStudent/>
-    },
-    {
-        path: 'create-faculty',
-        element: <CreateFaculty/>
-    },
-    {
-        path: 'create-admin',
-        element: <CreateAdmin/>
-    },
-]
+// Programatical way handle for routes
+export const adminRoutes = adminpaths.reduce((acc: TRoute[], item) => {
+    if (item.path && item.element) {
+        acc.push({
+            path: item.path,
+            element: item.element,
+        })
+    }
+    if (item.children) {
+        item.children.forEach((child) => {
+            acc.push({
+                path: child.path,
+                element: child.element,
+            })
+        })
+    }
+    return acc;
+}, [])

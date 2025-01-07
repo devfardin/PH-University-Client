@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import {
-  MenuFoldOutlined,
+  CloseOutlined,
   MenuUnfoldOutlined,
+  ProfileOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, MenuProps } from 'antd';
 const { Header, Sider, Content } = Layout;
+import logo from '../../assets/react.svg'
 
 const items: MenuProps['items'] = [
   {
     key: 'dashboard',
-    label: 'Dashboard'
+    label: 'Dashboard',
+    icon: <ProfileOutlined/>,
   },
   {
     key: 'profile',
@@ -22,7 +25,13 @@ const MainLayout = () => {
   return (
     <Layout style={{height:'100vh'}}>
     <Sider trigger={null} collapsible collapsed={collapsed}>
-      <div className="demo-logo-vertical" />
+      {/* Add you logo Here */}
+
+      <div className="demo-logo-vertical">
+        {
+          !collapsed ? <h1 style={{fontSize: '25px', color: 'white', display: 'flex', justifyContent: 'center', marginTop: '15px', marginBottom: '15px'}}>PH Uni</h1> : ''
+        }
+      </div>
       <Menu
         theme="dark"
         mode="inline"
@@ -31,17 +40,21 @@ const MainLayout = () => {
       />
     </Sider>
     <Layout>
-      <Header style={{ padding: 0, }}>
+      <Header style={{ padding: 0, paddingRight: 10,  background: 'white', borderRadius: 6, margin:10, display: 'flex', justifyContent: 'space-between' }}>
         <Button
           type="text"
-          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          icon={collapsed ? <MenuUnfoldOutlined /> : <CloseOutlined />}
           onClick={() => setCollapsed(!collapsed)}
           style={{
             fontSize: '16px',
             width: 64,
             height: 64,
+            color: 'black',
+            display: 'flex',
+            alignItems: 'center',
           }}
         />
+        <img style={{width: 64, height: 64, borderRadius: 100, }} src={logo} alt="" />
       </Header>
       <Content
         style={{

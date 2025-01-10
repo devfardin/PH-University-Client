@@ -3,32 +3,17 @@ import {
   CloseOutlined,
   MenuUnfoldOutlined,
 } from '@ant-design/icons';
-import { Button, Layout, Menu } from 'antd';
-const { Header, Sider, Content } = Layout;
+import { Button, Layout } from 'antd';
+const { Header, Content } = Layout;
 import logo from '../../assets/react.svg'
 import { Outlet } from 'react-router';
-import { adminSidebarItems } from '../../routes/admin.routes';
-
+import Sidebar from './Sidebar';
 
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout style={{height:'100vh'}}>
-    <Sider trigger={null} collapsible collapsed={collapsed}>
-      {/* Add you logo Here */}
-
-      <div className="demo-logo-vertical">
-        {
-          !collapsed ? <h1 style={{fontSize: '25px', color: 'white', display: 'flex', justifyContent: 'center', marginTop: '15px', marginBottom: '15px'}}>PH Uni</h1> : ''
-        }
-      </div>
-      <Menu
-        theme="dark"
-        mode="inline"
-        defaultSelectedKeys={['dashboard']}
-        items={adminSidebarItems}
-      />
-    </Sider>
+   <Sidebar collapsed={collapsed}/>
     <Layout>
       <Header style={{ padding: 0, paddingRight: 10,  background: 'white', borderRadius: 6, margin:10, display: 'flex', justifyContent: 'space-between' }}>
         <Button

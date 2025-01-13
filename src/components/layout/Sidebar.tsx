@@ -19,7 +19,7 @@ interface SidebarProps {
   }
 
 const Sidebar: React.FC<SidebarProps>  = ({collapsed}) => {
-  const role = 'student';
+  const role = 'admin';
   let sidebarItems;
   switch (role) {
     case userRole.ADMIN: 

@@ -23,6 +23,8 @@ const Login = () => {
    const res = await login(data).unwrap();
    const user = verifyToken(res.data.accessToken);
    dispatch(setUser({user: user, token: res.data.accessToken}))
+   
+   console.log(user);
   };
 
   return (

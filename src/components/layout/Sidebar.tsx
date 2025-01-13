@@ -6,6 +6,8 @@ import React from 'react';
 import logo from '../../assets/images/ph-logo.png'
 import { facultyPaths } from '../../routes/faculty.routes';
 import { studentPaths } from '../../routes/student.routes';
+import { useAppSelector } from '../../redux/hooks';
+import { selectCurrentUser } from '../../redux/features/auth/authSlice';
 
 const { Sider } = Layout;
 interface SidebarProps {
@@ -19,9 +21,11 @@ interface SidebarProps {
   }
 
 const Sidebar: React.FC<SidebarProps>  = ({collapsed}) => {
-  const role = 'admin';
+  const user = useAppSelector(selectCurrentUser)
+  const role = user!.role;
+  const role2 = 'admin';
   let sidebarItems;
-  switch (role) {
+  switch (role2) {
     case userRole.ADMIN: 
     sidebarItems = sideBarItemsGenerator(adminpaths, userRole.ADMIN);
     break;

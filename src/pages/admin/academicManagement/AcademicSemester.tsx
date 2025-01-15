@@ -7,7 +7,7 @@ const AcademicSemester = () => {
     
   return (
     <div>
-      <h1></h1>
+      <h1>All Academic Semester</h1>
     </div>
   )
 }

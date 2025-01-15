@@ -3,14 +3,14 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
-import { BgColorsOutlined, CreditCardTwoTone, PlusSquareOutlined, SolutionOutlined, UserOutlined } from '@ant-design/icons';
+import { BgColorsOutlined, CreditCardTwoTone, DiffOutlined, PlusSquareOutlined, SolutionOutlined, UserOutlined, WindowsOutlined } from '@ant-design/icons';
 
 export const adminpaths = [
     {
         name: "Dashboard",
         path: 'dashboard',
         element: <AdminDashboard />,
-        icon: <UserOutlined />,
+        icon: <WindowsOutlined />,
     },
     {
         name: 'Academic Management',
@@ -32,7 +32,7 @@ export const adminpaths = [
                 name: "Create Admin",
                 path: 'create-admin',
                 element: <CreateAdmin />,
-                icon: <CreditCardTwoTone/>
+                icon: <DiffOutlined />
             },
             {
                 name: "Create Faculty",

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useGetAllSemestersQuery } from '../../../redux/features/academicSemester/academicSemesterApi'
 
 const AcademicSemester = () => {

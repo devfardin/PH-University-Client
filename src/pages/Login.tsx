@@ -14,7 +14,7 @@ const Login = () => {
   const { register, handleSubmit } = useForm(
     {
       defaultValues: {
-        id: 'F-0001',
+        id: 'A-0001',
         password: 'password123@',
       }
     }

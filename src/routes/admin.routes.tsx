@@ -45,11 +45,7 @@ export const adminpaths = [
                 name: "Create Student",
                 path: 'create-student',
                 element: <CreateStudent />,
-            },
-            {
-                name: "Create Student",
-                path: 'create-student',
-                element: <CreateStudent />,
+                icon: <PlusSquareOutlined />
             },
         ]
     },

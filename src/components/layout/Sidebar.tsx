@@ -23,9 +23,8 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps>  = ({collapsed}) => {
   const user = useAppSelector(selectCurrentUser)
   const role = user!.role;
-  const role2 = 'admin';
   let sidebarItems;
-  switch (role2) {
+  switch (role) {
     case userRole.ADMIN: 
     sidebarItems = sideBarItemsGenerator(adminpaths, userRole.ADMIN);
     break;

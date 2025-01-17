@@ -14,8 +14,12 @@ const Login = () => {
   const user = useAppSelector(selectCurrentUser)
   const navigate = useNavigate();
   const [login]= useLoginMutation();
+const defaultValues=  {
+  id: 'A-0001',
+  password: 'password123@'
+  };
   const onSubmit = async (data: FieldValues) => {
-    console.log(data);
+      // Showing message in toast
      const toastId = toast.loading('Loggin in');
       try {
         const res = await login(data).unwrap();
@@ -29,11 +33,12 @@ const Login = () => {
       }
 
   };
+  // if have token login page is not showing
   if (token) {
     return <Navigate to={`/${user?.role}/dashboard`} replace={true} />
   }
   return (
-    <PHForm onSubmit={onSubmit}>
+    <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 20, height: '100vh' }}>
           <PHInput name={'id'} label={'ID'} type={'text'}/>
           <PHInput  type="text" name='password' label='Password'/>

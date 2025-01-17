@@ -26,12 +26,12 @@ if (result.error?.status === 401) {
     credentials: 'include',
   });
   const data = await res.json();
-  
+
   // check if the refresh token is valid and create new access token
-  if (data.data.accessToken) {
+  if (data?.data?.accessToken) {
     const user = (api.getState() as RootState).auth.user;
     api.dispatch(
-      setUser({user,token: data.data.accessToken})
+      setUser({user,token: data?.data?.accessToken})
     );
     result = await baseQuery(args, api, extraOptions);
   } else {

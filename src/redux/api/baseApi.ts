@@ -1,7 +1,7 @@
-import { createApi, fetchBaseQuery,  } from "@reduxjs/toolkit/query/react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { BaseQueryApi, BaseQueryFn, createApi, DefinitionType, FetchArgs, fetchBaseQuery,  } from "@reduxjs/toolkit/query/react";
 import { logOut, setUser } from "../features/auth/authSlice";
 import { RootState } from "../store";
-
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:5000/api/v1',
   credentials: 'include',
@@ -14,7 +14,7 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
+const baseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType > = async (args, api, extraOptions): Promise<any> => {
 let result = await baseQuery(args, api, extraOptions);
 
 if (result.error?.status === 401) {

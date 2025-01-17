@@ -1,12 +1,14 @@
+import AcademicDepartment from "../pages/admin/academicManagement/AcademicDepartment";
 import AcademicFaculty from "../pages/admin/academicManagement/AcademicFaculty";
 import AcademicSemester from "../pages/admin/academicManagement/AcademicSemester";
+import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAcademicDepartment";
 import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcademicFaculty";
 import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcademicSemester";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
-import { BgColorsOutlined, ContactsOutlined, ContainerOutlined, ControlOutlined, CreditCardTwoTone, DiffOutlined, FileAddOutlined, PlusSquareOutlined, SolutionOutlined, UserOutlined, WindowsOutlined } from '@ant-design/icons';
+import { BgColorsOutlined, ContactsOutlined, ContainerOutlined, ControlOutlined, CreditCardTwoTone, DiffOutlined, FileAddOutlined, FileDoneOutlined, PlusSquareOutlined, SolutionOutlined, UserOutlined, WindowsOutlined } from '@ant-design/icons';
 
 export const adminpaths = [
     {
@@ -41,6 +43,18 @@ export const adminpaths = [
                 name: "Create A. Faculty",
                 path: 'create-academic-faculty',
                 element: <CreateAcademicFaculty/>,
+                icon: <FileAddOutlined />
+            },
+            {
+                name: "Academic Department",
+                path: 'academic-department',
+                element: <AcademicDepartment/>,
+                icon: <FileDoneOutlined />
+            },
+            {
+                name: "Create A. Department",
+                path: 'create-academic-department',
+                element: <CreateAcademicDepartment/>,
                 icon: <FileAddOutlined />
             },
         ]

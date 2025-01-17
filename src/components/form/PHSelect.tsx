@@ -17,7 +17,7 @@ const PHSelect = ({name, label, placeholder, options}: TSelect) => {
         <Controller
             name={name}
             render={({ field }) => <Form.Item label={label}>
-                <Select {...field} placeholder={placeholder} showSearch options={[...options]}>
+                <Select {...field} placeholder={placeholder} showSearch options={[...options]} size='large'>
                 </Select>
             </Form.Item>}
         />

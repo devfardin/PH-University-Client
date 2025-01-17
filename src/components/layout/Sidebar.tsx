@@ -38,7 +38,7 @@ const Sidebar: React.FC<SidebarProps>  = ({collapsed}) => {
       break;
   }
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
+    <Sider trigger={null} collapsible breakpoint='lg' style={{height: '100vh', position: 'sticky', top: 0, left: 'left', overflowY: 'auto'}} collapsed={collapsed}>
     {/* Add you logo Here */}
 
     <div className="demo-logo-vertical">

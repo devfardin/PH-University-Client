@@ -21,7 +21,7 @@ const MainLayout = () => {
     toast('Logout Succesfull')
   }
   return (
-    <Layout style={{height:'100vh'}}>
+    <Layout style={{height:'100%'}}>
    <Sidebar collapsed={collapsed}/>
     <Layout>
       <Header style={{ padding: 0, paddingRight: 10,  background: 'white', borderRadius: 6, margin:10, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

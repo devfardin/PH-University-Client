@@ -8,7 +8,7 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
-import { BgColorsOutlined, ContactsOutlined, ContainerOutlined, ControlOutlined, CreditCardTwoTone, DiffOutlined, FileAddOutlined, FileDoneOutlined, PlusSquareOutlined, SolutionOutlined, UserOutlined, WindowsOutlined } from '@ant-design/icons';
+import { BgColorsOutlined, ContactsOutlined, ContainerOutlined, ControlOutlined, DiffOutlined, FileAddOutlined, FileDoneOutlined, PlusSquareOutlined, SolutionOutlined, UserOutlined, WindowsOutlined } from '@ant-design/icons';
 
 export const adminpaths = [
     {

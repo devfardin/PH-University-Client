@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import { FieldValues, useForm } from 'react-hook-form'
+import { FieldValues } from 'react-hook-form'
 import { useLoginMutation } from '../redux/features/auth/authApi';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { setUser, TUser, selectCurrentToken, selectCurrentUser } from '../redux/features/auth/authSlice';
@@ -13,15 +13,7 @@ const Login = () => {
   const token = useAppSelector(selectCurrentToken)
   const user = useAppSelector(selectCurrentUser)
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm(
-    {
-      defaultValues: {
-        id: 'A-0001',
-        password: 'password123@',
-      }
-    }
-  );
-  const [login, { error }] = useLoginMutation();
+  const [login]= useLoginMutation();
   const onSubmit = async (data: FieldValues) => {
     console.log(data);
      const toastId = toast.loading('Loggin in');

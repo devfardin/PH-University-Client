@@ -20,7 +20,6 @@ let result = await baseQuery(args, api, extraOptions);
 if (result.error?.status === 401) {
   // send refresh token
   console.log('Sending Refresh Token');
-  
   const res = await fetch('http://localhost:5000/api/v1/auth/refresh-token', {
     method: 'POST',
     credentials: 'include',
@@ -40,7 +39,6 @@ if (result.error?.status === 401) {
 }
 return result;
 }
-
 export const baseApi = createApi({
     reducerPath: 'baseApi',
     baseQuery: baseQueryWithRefreshToken,

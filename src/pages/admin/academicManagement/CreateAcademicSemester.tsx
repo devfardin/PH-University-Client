@@ -2,7 +2,8 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHForm from "../../../components/form/PHForm"
 import { Button, Flex } from "antd";
 import PHSelect from "../../../components/form/PHSelect";
-
+import { RightOutlined } from '@ant-design/icons';
+import PHDatePicker from "../../../components/form/PHDatePicker";
 const nameOptions = [
   { value: '01', label: 'Autumn' },
   { value: '02', label: 'Summer' },
@@ -10,11 +11,13 @@ const nameOptions = [
 ]
 const CreateAcademicSemester = () => {
   const onSubmit:SubmitHandler<FieldValues> = (data) => {
-    const codeNumber = data.name?.split('')[1]
-    const name = nameOptions[codeNumber-1].label;
+    const codeNumber = data.code?.split('')[1];
+    const name = nameOptions[codeNumber-1]?.label;
+
     const semesterData ={
       name,
       code: data.code,
+      year: data.year.$y,
     }
     console.log(semesterData);
     
@@ -24,10 +27,14 @@ const CreateAcademicSemester = () => {
     margin: 'auto',
   }
   return (
-    <Flex vertical style={baseStyle} justify="center" >
+    <Flex vertical style={baseStyle} justify="center" gap="">
       <PHForm onSubmit={onSubmit}>
         <PHSelect label="Select Semester Name" name="code" placeholder="Semester Name" options={nameOptions}/>
-        <Button htmlType="submit">Submit</Button>
+
+        <PHDatePicker label="Semester Year" name="year" />
+
+        <Button style={{fontSize: 18, padding:20, borderRadius:5 }} size="large" type="primary" htmlType="submit" icon={<RightOutlined />}>Submit</Button>
+        
       </PHForm>
     </Flex>
   )

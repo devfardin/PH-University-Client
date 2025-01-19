@@ -16,9 +16,12 @@ const PHSelect = ({name, label, placeholder, options}: TSelect) => {
     return (
         <Controller
             name={name}
-            render={({ field }) => <Form.Item label={label}>
+            render={({ field, fieldState: {error} }) => <Form.Item label={label}>
                 <Select {...field} placeholder={placeholder} showSearch options={[...options]} size='large'>
                 </Select>
+                {
+                    error && <small style={{fontSize: '15px', fontWeight: '400', color: 'red', marginLeft: 10}}>{error.message}</small>
+                }
             </Form.Item>}
         />
     )

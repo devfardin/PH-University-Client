@@ -15,9 +15,12 @@ const PHDatePicker = ({ name, placeholder, label, type, format }: TSelect) => {
     return (
         <Controller
             name={name}
-            render={({ field }) => <Form.Item>
-                <DatePicker className='full_width' aria-label={label} format={format}
+            render={({ field, fieldState: {error} }) => <Form.Item>
+                <DatePicker className='full_width' aria-label={label}  format={format}
                     disabledDate={disablePastYears}   {...field} placeholder={placeholder} size='large' picker={type}/>
+                    {
+                        error && <small>{error.message}</small>
+                    }
             </Form.Item>}
         />
     )

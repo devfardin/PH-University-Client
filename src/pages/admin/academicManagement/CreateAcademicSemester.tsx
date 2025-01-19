@@ -17,7 +17,10 @@ const CreateAcademicSemester = () => {
     const semesterData ={
       name,
       code: data.code,
-      year: data.year.$y,
+      year: data.year?.$y,
+      startMonth: data.startMonth?.$M+1,
+      endMonth: data.endMonth?.$M+1,
+
     }
     console.log(semesterData);
     
@@ -31,7 +34,10 @@ const CreateAcademicSemester = () => {
       <PHForm onSubmit={onSubmit}>
         <PHSelect label="Select Semester Name" name="code" placeholder="Semester Name" options={nameOptions}/>
 
-        <PHDatePicker label="Semester Year" name="year" />
+        <PHDatePicker label="Semester Year" name="year" type="year" format="YYYY"/>
+
+        <PHDatePicker label="Semester Start Month" name="startMonth" type="month" format="MMMM"/>
+        <PHDatePicker label="Semester End Month" name="endMonth" type="month" format="MMMM"/>
 
         <Button style={{fontSize: 18, padding:20, borderRadius:5 }} size="large" type="primary" htmlType="submit" icon={<RightOutlined />}>Submit</Button>
         

@@ -90,4 +90,4 @@ export const adminpaths = [
         element: <AdminDashboard />,
         icon: <UserOutlined />,
     },
-]
+];

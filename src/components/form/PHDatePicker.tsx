@@ -7,12 +7,9 @@ type TSelect = {
     placeholder?: string,
 }
 const PHDatePicker = ({ name, placeholder }: TSelect) => {
-    
     const disablePastYears = (current: { year: () => number; }) => {
         return current && current.year() < new Date().getFullYear();
     };
-
-
     return (
         <Controller
             name={name}

@@ -8,17 +8,16 @@ type TSelect = {
 }
 const PHDatePicker = ({ name, placeholder }: TSelect) => {
     
-    const disablePastYears = (current) => {
+    const disablePastYears = (current: { year: () => number; }) => {
         return current && current.year() < new Date().getFullYear();
     };
-
 
 
     return (
         <Controller
             name={name}
             render={({ field }) => <Form.Item>
-                <DatePicker
+                <DatePicker className='full_width'
                     disabledDate={disablePastYears}   {...field} placeholder={placeholder} size='large' picker="year" />
             </Form.Item>}
         />

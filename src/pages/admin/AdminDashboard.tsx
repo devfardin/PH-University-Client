@@ -1,7 +1,7 @@
 const AdminDashboard = () => {
   return (
     <div>
-      <h1>Admin Dashboard</h1>
+      <h1 style={{fontSize:'100px'}}>Admin Dashboard</h1>
     </div>
   )
 }

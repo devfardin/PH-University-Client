@@ -13,7 +13,6 @@ import { TResponse } from "../../../types/global";
 
 const CreateAcademicSemester = () => {
   const [addAcademicSemestet] = useAddAcademicSemestetMutation();
-
   const onSubmit:SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading('Semester Creating....')
     const codeNumber = data.code?.split('')[1];
@@ -26,7 +25,6 @@ const CreateAcademicSemester = () => {
       endMonth:data.endMonth,
     }
     try {
-      console.log(semesterData);
       const result = await addAcademicSemestet(semesterData) as TResponse;
 
       if(result?.data?.success) {
@@ -49,7 +47,6 @@ const CreateAcademicSemester = () => {
     value: (currentYear +index).toString(),
     label: (currentYear +index).toString()
   }))
-
   }
 
   return (
@@ -65,8 +62,6 @@ const CreateAcademicSemester = () => {
         <PHSelect label="Select Semester Start month" name="startMonth" placeholder="Semester Name" options={monthsObject}/>
 
         <PHSelect label="Select Semester End month" name="endMonth" placeholder="Semester Name" options={monthsObject}/>
-
-    
 
         <Button style={{fontSize: 18, padding:20, borderRadius:5 }} size="large" type="primary" htmlType="submit" icon={<RightOutlined />}>Submit</Button>
         

@@ -1,12 +1,12 @@
 import { Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllAcademicSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
-import { TSemesterTable } from "../../../types/academicSemester";
 import { monthsObjectTable } from "../../../constants/global";
 
 
 const AcademicSemester = () => {
   const { data: academicSemesterData } = useGetAllAcademicSemestersQuery(undefined);
-  const tableData = academicSemesterData?.data?.map(({ _id, name, code, startMonth, endMonth, year }: TSemesterTable) => ({
+  const tableData = academicSemesterData?.data?.map((
+    { _id, name, code, startMonth, endMonth, year }) => ({
     _id,
     name,
     code,
@@ -68,15 +68,13 @@ const AcademicSemester = () => {
       onFilter: (value, record) => record.endMonth.indexOf(value as string) === 0,
     },
   ];
-
-
   const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
   };
 
   return (
     <div>
-      {/* <h1>All Academic Semester {data?.data.length}</h1> */}
+      <h1 style={{ marginBottom: '30px' }}>All Academic Semester</h1>
       <Table<DataType>
         columns={columns}
         dataSource={tableData}
@@ -86,5 +84,4 @@ const AcademicSemester = () => {
     </div>
   )
 }
-
 export default AcademicSemester

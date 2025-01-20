@@ -51,6 +51,7 @@ const CreateAcademicSemester = () => {
 
   return (
     <Flex vertical style={baseStyle} justify="center">
+      <h1 style={{textAlign:'center', marginBottom: '30px'}}>Add Academic Semester</h1>
       <PHForm 
       onSubmit={onSubmit}
       resolver={zodResolver(academicSemesterSchema)}>

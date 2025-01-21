@@ -6,9 +6,16 @@ import { FieldValues, SubmitHandler } from "react-hook-form"
 import PHSelect from "../../../components/form/PHSelect"
 import PHDatePicker from "../../../components/form/PHDatePicker"
 import { bloodGroups, genderOption } from "../../../constants/createStudent"
+import { useGetAllAcademicSemestersQuery } from "../../../redux/features/admin/academicManagement.api"
 
 const CreateStudent = () => {
-
+  const {data: academicSemester, isLoading } = useGetAllAcademicSemestersQuery(undefined);
+  const admisitonSemesterOption = academicSemester?.data?.map((item)=> ({
+    value: item?._id,
+    label:`${item?.name} ${item?.year}`,
+    disabled: isLoading,
+  }))
+  
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
 
@@ -98,6 +105,9 @@ const CreateStudent = () => {
         </Row>
         <Row>
           <Divider>Academic Information</Divider>
+          <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+            <PHSelect options={!admisitonSemesterOption} disabled={isLoading} placeholder="Select Blood Group" name="addmissionSemester" label="Blood Group"/>
+          </Col>
         </Row>
 
         <Button htmlType="submit">Crate Student</Button>

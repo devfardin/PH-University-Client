@@ -61,6 +61,10 @@ const AcademicSemester = () => {
       dataIndex: 'code',
     },
     {
+      title: 'Year',
+      dataIndex: 'year',
+    },
+    {
       title: 'Start Month',
       dataIndex: 'startMonth',
       filters: monthsObjectTable,

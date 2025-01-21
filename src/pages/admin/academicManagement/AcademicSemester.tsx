@@ -1,6 +1,7 @@
 import { Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllAcademicSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
 import { monthsObjectTable } from "../../../constants/global";
+import { TAcademicSemester } from "../../../types/academicManagement";
 
 
 const AcademicSemester = () => {
@@ -16,15 +17,9 @@ const AcademicSemester = () => {
   })
   );
 
-  interface DataType {
-    key: React.Key;
-    name: string;
-    code: number;
-    startMonth: string;
-    endMonth: string;
-  }
+  type TTableData = Pick<TAcademicSemester, '_id' | 'name' | 'year' | 'startMonth' | 'endMonth' | 'code'>
 
-  const columns: TableColumnsType<DataType> = [
+  const columns: TableColumnsType<TTableData> = [
     {
       title: 'Semestet Name',
       dataIndex: 'name',
@@ -52,8 +47,6 @@ const AcademicSemester = () => {
     {
       title: 'Semester Code',
       dataIndex: 'code',
-      // defaultSortOrder: 'descend',
-      sorter: (a, b) => a.code - b.code,
     },
     {
       title: 'Start Month',
@@ -68,16 +61,17 @@ const AcademicSemester = () => {
       onFilter: (value, record) => record.endMonth.indexOf(value as string) === 0,
     },
   ];
-  const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
+  const onChange: TableProps<TTableData>['onChange'] = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
   };
 
   return (
     <div>
       <h1 style={{ marginBottom: '30px' }}>All Academic Semester</h1>
-      <Table<DataType>
+      <Table<TTableData>
         columns={columns}
         dataSource={tableData}
+        bordered
         onChange={onChange}
         showSorterTooltip={{ target: 'sorter-icon' }}
       />

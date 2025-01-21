@@ -12,7 +12,6 @@ const AcademicSemester = () => {
   const [params, setParams] = useState<TQueryParam[] | undefined>(undefined)
   const { data: academicSemesterData, isLoading, isFetching } = useGetAllAcademicSemestersQuery(params)
 
-  console.log(isFetching, isLoading);
   
   const tableData = academicSemesterData?.data?.map((
     { _id, name, code, startMonth, endMonth, year }, index) => ({

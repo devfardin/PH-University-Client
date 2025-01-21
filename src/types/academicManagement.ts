@@ -17,4 +17,5 @@ export type TAcademicSemester = {
     createdAt: string,
     updateAt: string,
     __v: number,
+    key?: string,
 }

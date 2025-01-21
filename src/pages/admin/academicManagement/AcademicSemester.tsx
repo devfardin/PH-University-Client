@@ -5,21 +5,28 @@ import { TAcademicSemester } from "../../../types/academicManagement";
 
 
 const AcademicSemester = () => {
-  const { data: academicSemesterData } = useGetAllAcademicSemestersQuery(undefined);
+  const { data: academicSemesterData } = useGetAllAcademicSemestersQuery([{
+    name: 'name', value: 'Autumn' }])
+
   const tableData = academicSemesterData?.data?.map((
-    { _id, name, code, startMonth, endMonth, year }) => ({
-    _id,
+    { _id, name, code, startMonth, endMonth, year }, index) => ({
+    key: _id,
     name,
     code,
     startMonth,
     endMonth,
-    year
+    year,
+    index,
   })
   );
 
-  type TTableData = Pick<TAcademicSemester, '_id' | 'name' | 'year' | 'startMonth' | 'endMonth' | 'code'>
+  type TTableData = Pick<TAcademicSemester, 'name' | 'year' | 'startMonth' | 'endMonth' | 'code' | 'key'>
 
   const columns: TableColumnsType<TTableData> = [
+    {
+      title: 'Sr No',
+      dataIndex: 'index',
+    },
     {
       title: 'Semestet Name',
       dataIndex: 'name',
@@ -64,7 +71,6 @@ const AcademicSemester = () => {
   const onChange: TableProps<TTableData>['onChange'] = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
   };
-
   return (
     <div>
       <h1 style={{ marginBottom: '30px' }}>All Academic Semester</h1>

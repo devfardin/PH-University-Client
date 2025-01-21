@@ -9,7 +9,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
 import { useAddAcademicSemestetMutation } from "../../../redux/features/admin/academicManagement.api";
 import { toast } from "sonner";
-import { TResponse } from "../../../types/global";
 
 const CreateAcademicSemester = () => {
   const [addAcademicSemestet] = useAddAcademicSemestetMutation();
@@ -25,7 +24,10 @@ const CreateAcademicSemester = () => {
       endMonth:data.endMonth,
     }
     try {
-      const result = await addAcademicSemestet(semesterData) as TResponse;
+      const result = await addAcademicSemestet(semesterData);
+      console.log(result);
+      
+      
 
       if(result?.data?.success) {
         toast.success(result?.data?.message, {id: toastId});
@@ -40,6 +42,9 @@ const CreateAcademicSemester = () => {
   const baseStyle: React.CSSProperties ={
     width: '40%',
     margin: 'auto',
+    border: '1px solid ',
+    padding: '15px 10px',
+    borderRadius: '5px'
   }
   const generateYears = () => {
    const currentYear = new Date().getFullYear();

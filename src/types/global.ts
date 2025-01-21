@@ -1,11 +1,9 @@
 import { BaseQueryApi } from "@reduxjs/toolkit/query";
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export type TError = {
     data: {
         message: string,
-        stack: string,
         success: boolean,
+        stack: string,
     };
     status: number,
 }
@@ -22,5 +20,6 @@ export type TResponse<T> = {
     error?: TError;
     meta?: TMeta;
     success: boolean;
+    message: string;
 }
 export type TResponseRedux<T> = TResponse<T> & BaseQueryApi

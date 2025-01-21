@@ -4,6 +4,7 @@ import { monthsObjectTable } from "../../../constants/global";
 import { TAcademicSemester } from "../../../types/academicManagement";
 import { useState } from "react";
 import Loading from "../../../components/share/Loading";
+import DashboardPageTitle from "../../../components/share/DashboardPageTitle";
 import { TQueryParam } from "../../../types";
 
 
@@ -90,7 +91,7 @@ const AcademicSemester = () => {
   }
   return (
     <div>
-      <h1 style={{ marginBottom: '30px' }}>All Academic Semester</h1>
+      <DashboardPageTitle title='All Academic Semester' style='center'/>
       <Table<TTableData>
         columns={columns}
         dataSource={tableData}

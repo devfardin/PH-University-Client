@@ -9,6 +9,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
 import { useAddAcademicSemestetMutation } from "../../../redux/features/admin/academicManagement.api";
 import { toast } from "sonner";
+import DashboardPageTitle from "../../../components/share/DashboardPageTitle";
+import { TError } from "../../../types";
 
 const CreateAcademicSemester = () => {
   const [addAcademicSemestet] = useAddAcademicSemestetMutation();
@@ -24,15 +26,12 @@ const CreateAcademicSemester = () => {
       endMonth:data.endMonth,
     }
     try {
-      const result = await addAcademicSemestet(semesterData);
-      console.log(result);
-      
-      
+      const result = await addAcademicSemestet(semesterData);    
 
       if(result?.data?.success) {
         toast.success(result?.data?.message, {id: toastId});
       } else {
-        toast.error(result?.error?.data?.message, {id: toastId});
+        toast.error((result?.error as TError)?.data?.message, {id: toastId});
       }
     } catch (error) {
       const err = error as { data: { message: string } };
@@ -56,7 +55,7 @@ const CreateAcademicSemester = () => {
 
   return (
     <Flex vertical style={baseStyle} justify="center">
-      <h1 style={{textAlign:'center', marginBottom: '30px'}}>Add Academic Semester</h1>
+      <DashboardPageTitle style='center' title='Add Academic Semester'/>
       <PHForm 
       onSubmit={onSubmit}
       resolver={zodResolver(academicSemesterSchema)}>

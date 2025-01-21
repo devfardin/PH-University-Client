@@ -4,14 +4,15 @@ type TInputProps = {
     name: string;
     label: string;
     type: string;
+    placeholder?:string;
 }
-const PHInput = ({name, label, type}: TInputProps) => {
+const PHInput = ({name, label, type, placeholder}: TInputProps) => {
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: 5,}}>
        <Controller
        name={name}
        render={({field}) => <Form.Item rules={[{required: true}]} label={label}>
-         <Input {...field} type={type} id={name} size='large'/> 
+         <Input {...field} type={type} id={name} placeholder={placeholder} size='large'/> 
         </Form.Item> }
        />
     </div>

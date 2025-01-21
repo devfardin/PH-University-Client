@@ -9,6 +9,7 @@ const AlllStudents = () => {
 
 const {data: allStudentData, isLoading, isFetching } = useGetAllStudentsQuery(undefined);
 
+
 const dataTable = allStudentData?.data?.map(({_id, name, gender, dateOfBirth,  email, contactNo, emergencyContactNo
  }, index) => ({
     key: _id,
@@ -22,7 +23,7 @@ const dataTable = allStudentData?.data?.map(({_id, name, gender, dateOfBirth,  e
 })
 );
 
-type TTableData = Pick<TStudent, 'name' | 'gender' | 'dateOfBirth' | 'email' | 'emergencyContactNo' | 'key'>;
+type TTableData = Pick<TStudent, 'name' | 'gender' | 'dateOfBirth' | 'email' | 'contactNo' | 'emergencyContactNo' | 'key'>;
 
   const columns: TableColumnsType<TTableData> = [
     {

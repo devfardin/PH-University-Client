@@ -6,23 +6,33 @@ import { FieldValues, SubmitHandler } from "react-hook-form"
 import PHSelect from "../../../components/form/PHSelect"
 import PHDatePicker from "../../../components/form/PHDatePicker"
 import { bloodGroups, genderOption } from "../../../constants/createStudent"
-import { useGetAllAcademicSemestersQuery } from "../../../redux/features/admin/academicManagement.api"
+import { useGetAllAcademicSemestersQuery, useGetAllDepartmentQuery } from "../../../redux/features/admin/academicManagement.api"
+import Loading from "../../../components/share/Loading"
 
 const CreateStudent = () => {
-  const {data: academicSemester, isLoading } = useGetAllAcademicSemestersQuery(undefined);
+  const {data: academicSemester, isLoading, isFetching } = useGetAllAcademicSemestersQuery(undefined);
+  const {data: departmentData, isLoading: departmentLoading} = useGetAllDepartmentQuery(undefined)
+  // Create Academic Semester option
   const admisitonSemesterOption = academicSemester?.data?.map((item)=> ({
     value: item?._id,
     label:`${item?.name} ${item?.year}`,
     disabled: isLoading,
   }))
-  
+  // create Academic Department option
+  const academicDepartment = departmentData?.data?.map((item) => ({
+    value: item._id,
+    label: item.name,
+  }))
+  // handle form submition function
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
 
-    // const formData = new FormData();
 
   }
-
+  
+  if(isFetching) {
+    return <Loading></Loading>
+  }
   return (
     <Flex vertical>
       <DashboardPageTitle title="Crate New Student" style="left" />
@@ -65,11 +75,11 @@ const CreateStudent = () => {
             <PHInput type="text" placeholder="Enter Emergency contact" name="emergencyContactNo" label="Emergency Contact Number"/>
           </Col>
 
-          <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+          <Col span={24} md={{ span: 12 }} lg={{ span: 12 }}>
             <PHInput type="text" placeholder="Enter Present Address" name="presentAddress" label="Present Address"/>
           </Col>
 
-          <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+          <Col span={24} md={{ span: 12 }} lg={{ span: 12 }}>
             <PHInput type="text" placeholder="Enter Permanent Address" name="permanentAddress" label="Permanent Address"/>
           </Col>
         </Row>
@@ -103,10 +113,14 @@ const CreateStudent = () => {
             <PHInput type="text" placeholder="Enter contact Number" name="localGuardian.phoneNo" label="Contact Number"/>
           </Col>
         </Row>
-        <Row>
+
+        <Row gutter={15}>
           <Divider>Academic Information</Divider>
           <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-            <PHSelect options={!admisitonSemesterOption} disabled={isLoading} placeholder="Select Blood Group" name="addmissionSemester" label="Blood Group"/>
+            <PHSelect options={admisitonSemesterOption} disabled={isLoading} placeholder="Select Semester" name="addmissionSemester" label="Academic Semester"/>
+          </Col>
+          <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+            <PHSelect options={academicDepartment} disabled={departmentLoading} placeholder="Select Department" name="addmissionDepartment" label="Academic Department"/>
           </Col>
         </Row>
 

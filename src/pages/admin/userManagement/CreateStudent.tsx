@@ -10,8 +10,13 @@ import { useGetAllAcademicSemestersQuery, useGetAllDepartmentQuery } from "../..
 import Loading from "../../../components/share/Loading"
 
 const CreateStudent = () => {
+  // query for all academic semester
   const {data: academicSemester, isLoading, isFetching } = useGetAllAcademicSemestersQuery(undefined);
+  // query for all department 
   const {data: departmentData, isLoading: departmentLoading} = useGetAllDepartmentQuery(undefined)
+  // meution for create student
+  
+
   // Create Academic Semester option
   const admisitonSemesterOption = academicSemester?.data?.map((item)=> ({
     value: item?._id,
@@ -30,13 +35,39 @@ const CreateStudent = () => {
 
   }
   
+  const defaultValues =  {
+    name: {
+      firstName: "Rima",
+      middleName: "Aktar",
+      lastName: "Islam",
+    },
+    gender: "male",
+    // dateOfBirth: "14-05-2007",
+    email: "rima@gmail.com",
+    contactNo: "01641965230",
+    emergencyContactNo: "01316049157",
+    bloodGroup: "A+",
+    presentAddress: "Harinateli, Paiska, Dhanbari",
+    permanentAddress: "Dhaka, Bangladesh",
+    guardian: {
+      fathersName: "Mizan",
+      mothersName: "Jobeda",
+      phoneNo: "01245754",
+    },
+    localGuardian: {
+      name: "Ridoy",
+      relation: "Brother",
+      phoneNo: "0177542112",
+    }
+  };
+
   if(isFetching) {
     return <Loading></Loading>
   }
   return (
     <Flex vertical>
       <DashboardPageTitle title="Crate New Student" style="left" />
-      <PHForm onSubmit={onSubmit}>
+      <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
 
         <Divider>Personal Information</Divider>
         <Row gutter={15}>
@@ -53,7 +84,7 @@ const CreateStudent = () => {
             <PHSelect placeholder="Select Gender" name="gender" label="Gender"  options={genderOption}/>
           </Col>
           <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-            <PHDatePicker type="date" placeholder="Enter Date of birth" name="dateOfBirth" label="Date Of Birth" />
+            <PHDatePicker format="DD-MM-YYYY" type="date" placeholder="Enter Date of birth" name="dateOfBirth" label="Date Of Birth" />
           </Col>
 
           <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>

@@ -10,6 +10,7 @@ import { useGetAllAcademicSemestersQuery, useGetAllDepartmentQuery } from "../..
 import Loading from "../../../components/share/Loading"
 import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api"
 import { toast } from "sonner"
+import { TError } from "../../../types"
 
 const CreateStudent = () => {
   // query for all academic semester
@@ -43,8 +44,7 @@ const CreateStudent = () => {
   formData.append('data', JSON.stringify(studentData));
   const result = await addStudent(formData);
   if(result?.error) {
-
-    const errorMessage = result?.error?.data?.message;
+    const errorMessage = (result?.error as TError).data?.message;
      toast.error(errorMessage, {id: toastId})
   } else {
     const success = result.data.message;

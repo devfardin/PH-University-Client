@@ -7,7 +7,7 @@ const userManagementApi = baseApi.injectEndpoints({
         getAllStudents: builder.query({
             query: () => ({
                 url: '/students',
-                method: 'GET', 
+                method: 'GET',
             }),
             transformResponse: (response: TResponseRedux<TStudent[]>) => {
                 return {
@@ -15,13 +15,14 @@ const userManagementApi = baseApi.injectEndpoints({
                 }
             }
         }),
-        
+
         addStudent: builder.mutation({
             query: (data) => ({
-                url: '/users/create-student',
+                url: 'users/create-student',
                 method: 'POST',
                 body: data,
-            })
+            } 
+        )
         })
     })
 })

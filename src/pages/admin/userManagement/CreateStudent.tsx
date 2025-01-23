@@ -8,6 +8,8 @@ import PHDatePicker from "../../../components/form/PHDatePicker"
 import { bloodGroups, genderOption } from "../../../constants/createStudent"
 import { useGetAllAcademicSemestersQuery, useGetAllDepartmentQuery } from "../../../redux/features/admin/academicManagement.api"
 import Loading from "../../../components/share/Loading"
+import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api"
+import { toast } from "sonner"
 
 const CreateStudent = () => {
   // query for all academic semester
@@ -15,6 +17,7 @@ const CreateStudent = () => {
   // query for all department 
   const {data: departmentData, isLoading: departmentLoading} = useGetAllDepartmentQuery(undefined)
   // meution for create student
+  const [addStudent] = useAddStudentMutation();
   
 
   // Create Academic Semester option
@@ -29,10 +32,24 @@ const CreateStudent = () => {
     label: item.name,
   }))
   // handle form submition function
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = async(data) => {
+    const  toastId = toast.loading('Creating Student')
+    const studentData = {
+      password: 'password',
+      student: data,
+    }
+  // Create FormData
+  const formData = new FormData();
+  formData.append('data', JSON.stringify(studentData));
+  const result = await addStudent(formData);
+  if(result?.error) {
 
-
+    const errorMessage = result?.error?.data?.message;
+     toast.error(errorMessage, {id: toastId})
+  } else {
+    const success = result.data.message;
+    toast.success(success, {id: toastId})
+  }
   }
   
   const defaultValues =  {
@@ -58,7 +75,8 @@ const CreateStudent = () => {
       name: "Ridoy",
       relation: "Brother",
       phoneNo: "0177542112",
-    }
+    },
+   profileImage: "https://res.cloudinary.com/dng2c2jxv/image/upload/v1737537521/2026010002Rima.jpg"
   };
 
   if(isFetching) {

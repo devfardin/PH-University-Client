@@ -7,9 +7,9 @@ import { useState } from 'react';
 
 const AlllStudents = () => {
   const [page, setPage] = useState(1)
+  
 
 const {data: allStudentData, isLoading, isFetching } = useGetAllStudentsQuery([
-  {name: 'limit', value: 3},
   {name: 'page', value: page},
   { name: 'sort', value: 'id' }
   
@@ -121,9 +121,11 @@ const metaData = allStudentData?.meta;
         loading={isFetching}
         columns={columns} 
         dataSource={dataTable} 
-        onChange={onChange} />
+        onChange={onChange}
+        />
 
-        <Pagination onChange={(value)=> setPage(value)} align="center" pageSize={ metaData?.limit } defaultCurrent={1} total={metaData?.total} style={{marginTop: '10px'}} />
+        <Pagination onChange={(value)=> setPage(value)} align="center" 
+        pageSize={ metaData?.limit } defaultCurrent={page} total={metaData?.total} style={{marginTop: '10px'}} />
     </div>
   )
 }

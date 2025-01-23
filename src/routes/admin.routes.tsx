@@ -89,6 +89,11 @@ export const adminpaths = [
                 element: <AlllStudents />,
                 icon: <PlusSquareOutlined />
             },
+            {
+                path: 'student-detailes',
+                element: <AlllStudents />,
+                icon: <PlusSquareOutlined />
+            },
         ]
     },
     {

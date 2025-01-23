@@ -15,11 +15,15 @@ export const sideBarItemsGenerator = (items: TUserPaths[], role: string) => {
                 key: item.name,
                 label: item.name,
                 icon: item.icon,
-                children: item.children.map((child) => ({
-                    key: child.name,
-                    icon: child.icon,
-                    label: <NavLink to={`/${role}/${child.path}`}> {child.name} </NavLink>,
-                }))
+                children: item.children.map((child) => {
+                    if(child.name) {
+                        return {
+                            icon: child.icon,
+                            key: child.name,
+                            label: <NavLink to={`/${role}/${child.path}`}> {child.name} </NavLink>,
+                        }
+                    }
+                })
             })
         }
         return acc;

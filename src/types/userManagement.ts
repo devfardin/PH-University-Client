@@ -1,3 +1,5 @@
+
+// Student Types
 export type TGuardian = {
     fathersName: string;
     mothersName: string;
@@ -16,6 +18,7 @@ export type TGuardian = {
   
   export type TStudent = {
     _id: string;
+    id: string;
     user: string;
     name: TUserName;
     gender: 'male' | 'female' | 'other';

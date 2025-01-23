@@ -1,6 +1,5 @@
 import { Table, TableColumnsType, TableProps } from 'antd';
 import { useGetAllStudentsQuery } from '../../../redux/features/admin/userManagement.api';
-import { TStudent } from '../../../types/userManagement';
 import Loading from '../../../components/share/Loading';
 import DashboardPageTitle from '../../../components/share/DashboardPageTitle';
 
@@ -10,21 +9,29 @@ const AlllStudents = () => {
 const {data: allStudentData, isLoading, isFetching } = useGetAllStudentsQuery(undefined);
 
 
-const dataTable = allStudentData?.data?.map(({_id, name, gender, dateOfBirth,  email, contactNo, emergencyContactNo
+const dataTable = allStudentData?.data?.map(({ name, gender, dateOfBirth,  email, contactNo, emergencyContactNo, id
  }, index) => ({
-    key: _id,
+    key: id,
     name: name.firstName + " " + name.lastName,
     gender,
     dateOfBirth,
     email,
     contactNo,
     emergencyContactNo,
-    index
+    index,
+    id
 })
 );
 
-type TTableData = Pick<TStudent, 'name' | 'gender' | 'dateOfBirth' | 'email' | 'contactNo' | 'emergencyContactNo' | 'key'>;
-
+  type TTableData = {
+    key: string,
+    name: string,
+    gender: "male" | "female" | "other",
+    dateOfBirth: string,
+    email: string,
+    contactNo: string,
+    emergencyContactNo: string,
+  }
   const columns: TableColumnsType<TTableData> = [
     {
       title: 'Sr No',
@@ -33,6 +40,10 @@ type TTableData = Pick<TStudent, 'name' | 'gender' | 'dateOfBirth' | 'email' | '
     {
       title: 'Name',
       dataIndex: 'name',
+    },
+    {
+      title: 'Student id',
+      dataIndex: 'id',
     },
     {
       title: 'Gender',

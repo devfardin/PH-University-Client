@@ -1,8 +1,8 @@
-import { Button, Col, Divider, Flex, Row } from "antd"
+import { Button, Col, Divider, Flex, Form, Input, Row } from "antd"
 import PHForm from "../../../components/form/PHForm"
 import DashboardPageTitle from "../../../components/share/DashboardPageTitle"
 import PHInput from "../../../components/form/PHInput"
-import { FieldValues, SubmitHandler } from "react-hook-form"
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form"
 import PHSelect from "../../../components/form/PHSelect"
 import PHDatePicker from "../../../components/form/PHDatePicker"
 import { bloodGroups, genderOption } from "../../../constants/createStudent"
@@ -42,6 +42,8 @@ const CreateStudent = () => {
   // Create FormData
   const formData = new FormData();
   formData.append('data', JSON.stringify(studentData));
+  formData.append('file', data.profileImage)
+  
   const result = await addStudent(formData);
   if(result?.error) {
     const errorMessage = (result?.error as TError).data?.message;
@@ -76,7 +78,7 @@ const CreateStudent = () => {
       relation: "Brother",
       phoneNo: "0177542112",
     },
-   profileImage: "https://res.cloudinary.com/dng2c2jxv/image/upload/v1737537521/2026010002Rima.jpg"
+  //  profileImage: "https://res.cloudinary.com/dng2c2jxv/image/upload/v1737537521/2026010002Rima.jpg"
   };
 
   if(isFetching) {
@@ -89,17 +91,29 @@ const CreateStudent = () => {
 
         <Divider>Personal Information</Divider>
         <Row gutter={15}>
-          <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+          <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
             <PHInput placeholder="Enter First Name" type="text" name="name.firstName" label="First Name" />
           </Col>
-          <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+          <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
             <PHInput placeholder="Enter Middle Name" type="text" name="name.middleName" label="Middle Name" />
           </Col>
-          <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+          <Col span={24} md={{ span: 8 }} lg={{ span: 6 }}>
             <PHInput placeholder="Enter Last Name" type="text" name="name.lastName" label="Last Name" />
           </Col>
-          <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+          <Col span={24} md={{ span: 12 }} lg={{ span: 6 }}>
             <PHSelect placeholder="Select Gender" name="gender" label="Gender"  options={genderOption}/>
+          </Col>
+          <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+          <Controller 
+          name="profileImage"
+          render={({field: { onChange, value, ...field }}) => (
+            <Form.Item label="Upload Profile">
+              <Input type="file" value={value?.firstName} {...field} size="large"
+              onChange={(e) => onChange(e.target.files?.[0])}
+              />
+            </Form.Item>
+          ) }
+          />
           </Col>
           <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
             <PHDatePicker format="DD-MM-YYYY" type="date" placeholder="Enter Date of birth" name="dateOfBirth" label="Date Of Birth" />

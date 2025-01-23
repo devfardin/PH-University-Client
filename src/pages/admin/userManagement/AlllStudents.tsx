@@ -1,15 +1,24 @@
-import { Table, TableColumnsType, TableProps } from 'antd';
+import { Button, Flex, Table, TableColumnsType, TableProps } from 'antd';
 import { useGetAllStudentsQuery } from '../../../redux/features/admin/userManagement.api';
 import Loading from '../../../components/share/Loading';
 import DashboardPageTitle from '../../../components/share/DashboardPageTitle';
+import StudentDetailes from './StudentDetailes';
+import { useState } from 'react';
+import { TQueryParam } from '../../../types';
 
 
 const AlllStudents = () => {
+  const [params, setParams] = useState<TQueryParam[]>([]);
+  const [page, setPage] = useState(1)
 
-const {data: allStudentData, isLoading, isFetching } = useGetAllStudentsQuery(undefined);
+const {data: allStudentData, isLoading, isFetching } = useGetAllStudentsQuery([
+  {name: 'limit', value: 2},
+  {name: 'page', value: page},
+  { name: 'sort', value: 'id' }
+  
+]);
 
-
-const dataTable = allStudentData?.data?.map(({ name, gender, dateOfBirth,  email, contactNo, emergencyContactNo, id
+const dataTable = allStudentData?.data?.map(({ name, gender, dateOfBirth,  email, contactNo, emergencyContactNo, id, profileImage
  }, index) => ({
     key: id,
     name: name.firstName + " " + name.lastName,
@@ -19,19 +28,21 @@ const dataTable = allStudentData?.data?.map(({ name, gender, dateOfBirth,  email
     contactNo,
     emergencyContactNo,
     index,
-    id
+    id, 
+    profileImage
 })
 );
 
-  type TTableData = {
+   type TTableData = {
     key: string,
     name: string,
     gender: "male" | "female" | "other",
     dateOfBirth: string,
     email: string,
     contactNo: string,
-    emergencyContactNo: string,
-  }
+    emergencyContactNo: string
+  };
+
   const columns: TableColumnsType<TTableData> = [
     {
       title: 'Sr No',
@@ -79,6 +90,19 @@ const dataTable = allStudentData?.data?.map(({ name, gender, dateOfBirth,  email
     {
       title: 'Emergency  Contact',
       dataIndex: 'emergencyContactNo',
+    },
+    {
+      title: 'Action',
+      key: 'x',
+      render: (student) => {
+        return (
+          <Flex gap={10}>
+            <StudentDetailes student={ student }/>
+
+            <Button>Blocked</Button>
+          </Flex>
+        )
+      }
     },
   ];
   

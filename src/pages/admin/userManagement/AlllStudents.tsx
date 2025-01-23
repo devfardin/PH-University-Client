@@ -1,9 +1,10 @@
-import { Button, Flex, Pagination, Table, TableColumnsType, TableProps } from 'antd';
+import { Flex, Pagination, Table, TableColumnsType, TableProps } from 'antd';
 import { useGetAllStudentsQuery } from '../../../redux/features/admin/userManagement.api';
 import Loading from '../../../components/share/Loading';
 import DashboardPageTitle from '../../../components/share/DashboardPageTitle';
 import StudentDetailes from './StudentDetailes';
 import { useState } from 'react';
+import BlockStudent from './modal/BlockStudent';
 
 const AlllStudents = () => {
   const [page, setPage] = useState(1)
@@ -15,7 +16,7 @@ const {data: allStudentData, isLoading, isFetching } = useGetAllStudentsQuery([
   
 ]);
 
-const dataTable = allStudentData?.data?.map(({ name, gender, dateOfBirth,  email, contactNo, emergencyContactNo, id, profileImage
+const dataTable = allStudentData?.data?.map(({ name, gender, dateOfBirth,  email, contactNo, emergencyContactNo, id, profileImage,
  }, index) => ({
     key: id,
     name: name.firstName + " " + name.lastName,
@@ -97,7 +98,8 @@ const metaData = allStudentData?.meta;
           <Flex gap={10}>
             <StudentDetailes student={ student }/>
 
-            <Button>Blocked</Button>
+            {/* <Button>Blocked</Button> */}
+            <BlockStudent studentId={student.id as string}/>
           </Flex>
         )
       }

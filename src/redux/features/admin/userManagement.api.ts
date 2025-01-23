@@ -25,7 +25,6 @@ const userManagementApi = baseApi.injectEndpoints({
                 }
             }
         }),
-
         addStudent: builder.mutation({
             query: (data) => ({
                 url: 'users/create-student',
@@ -33,8 +32,16 @@ const userManagementApi = baseApi.injectEndpoints({
                 body: data,
             } 
         )
-        })
+        }),
+        blockedUser: builder.mutation({
+            query: (data) => (
+                {
+                url: `users/change-status/${data}`,
+                method: 'PUT',
+                body: { status: 'blocked' },
+            })
+        }),
     })
 })
 
-export const { useGetAllStudentsQuery, useAddStudentMutation } = userManagementApi;
+export const { useGetAllStudentsQuery, useAddStudentMutation, useBlockedUserMutation } = userManagementApi;

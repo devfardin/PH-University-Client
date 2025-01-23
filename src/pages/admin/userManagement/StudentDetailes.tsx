@@ -19,10 +19,7 @@ export type TStudenModelData = Pick<TStudent, 'name' | 'id' | 'profileImage' | '
   };
 const StudentDetailes = ({student}: TTableData) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    console.log(student);
     
-
     const showModal = () => {
       setIsModalOpen(true);
     };

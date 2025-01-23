@@ -1,18 +1,15 @@
-import { Button, Flex, Table, TableColumnsType, TableProps } from 'antd';
+import { Button, Flex, Pagination, Table, TableColumnsType, TableProps } from 'antd';
 import { useGetAllStudentsQuery } from '../../../redux/features/admin/userManagement.api';
 import Loading from '../../../components/share/Loading';
 import DashboardPageTitle from '../../../components/share/DashboardPageTitle';
 import StudentDetailes from './StudentDetailes';
 import { useState } from 'react';
-import { TQueryParam } from '../../../types';
-
 
 const AlllStudents = () => {
-  const [params, setParams] = useState<TQueryParam[]>([]);
   const [page, setPage] = useState(1)
 
 const {data: allStudentData, isLoading, isFetching } = useGetAllStudentsQuery([
-  {name: 'limit', value: 2},
+  {name: 'limit', value: 3},
   {name: 'page', value: page},
   { name: 'sort', value: 'id' }
   
@@ -27,11 +24,12 @@ const dataTable = allStudentData?.data?.map(({ name, gender, dateOfBirth,  email
     email,
     contactNo,
     emergencyContactNo,
-    index,
+    index:index+1,
     id, 
     profileImage
 })
 );
+const metaData = allStudentData?.meta;
 
    type TTableData = {
     key: string,
@@ -113,15 +111,19 @@ const dataTable = allStudentData?.data?.map(({ name, gender, dateOfBirth,  email
   if(isLoading) {
     return <Loading></Loading>
   }
+  
   return (
     <div>
         <DashboardPageTitle title='All Students Information' style='left'/>
         <Table<TTableData> 
+        pagination={false}
         bordered  
         loading={isFetching}
         columns={columns} 
         dataSource={dataTable} 
         onChange={onChange} />
+
+        <Pagination onChange={(value)=> setPage(value)} align="center" pageSize={ metaData?.limit } defaultCurrent={1} total={metaData?.total} style={{marginTop: '10px'}} />
     </div>
   )
 }

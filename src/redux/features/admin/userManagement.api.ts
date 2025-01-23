@@ -21,6 +21,7 @@ const userManagementApi = baseApi.injectEndpoints({
             transformResponse: (response: TResponseRedux<TStudent[]>) => {
                 return {
                     data: response.data,
+                    meta: response.meta
                 }
             }
         }),
